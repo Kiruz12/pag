@@ -1,5 +1,140 @@
 <!doctype html>
-<html>
-  <head><meta charset="utf-8"><title>Mi web</title></head>
-  <body><h1>Hola Juanma</h1></body>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Para Camila 💘</title>
+  <style>
+    :root{
+      --pink:#ffb3c7;
+      --hot:#ff4d6d;
+      --soft:#ffe3ec;
+      --text:#4a1c2b;
+      --card:#ffffffee;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: linear-gradient(135deg, #ffccd5, #ffe6f0);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      color:var(--text);
+    }
+    .hearts span{
+      position:fixed;
+      width:20px;height:20px;
+      background:var(--hot);
+      transform:rotate(45deg);
+      animation: float 8s linear infinite;
+      opacity:.7;
+    }
+    .hearts span:before,.hearts span:after{
+      content:"";
+      position:absolute;
+      width:20px;height:20px;
+      background:var(--hot);
+      border-radius:50%;
+    }
+    .hearts span:before{left:-10px}
+    .hearts span:after{top:-10px}
+    @keyframes float{
+      0%{transform:translateY(110vh) rotate(45deg); opacity:0}
+      20%{opacity:.8}
+      100%{transform:translateY(-10vh) rotate(45deg); opacity:0}
+    }
+
+    .card{
+      position:relative;
+      background:var(--card);
+      padding:32px 28px;
+      border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.15);
+      text-align:center;
+      max-width:420px;
+      z-index:2;
+      backdrop-filter: blur(6px);
+    }
+    h1{margin:0 0 10px;font-size:28px}
+    p{margin:0 0 24px;font-size:18px}
+
+    .buttons{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      position:relative;
+    }
+    button{
+      border:none;
+      padding:12px 22px;
+      font-size:16px;
+      border-radius:999px;
+      cursor:pointer;
+      transition:.2s transform, .2s box-shadow;
+    }
+    #yes{
+      background:var(--hot);
+      color:white;
+      box-shadow:0 10px 20px rgba(255,77,109,.35);
+    }
+    #yes:hover{transform:scale(1.06)}
+    #no{
+      background:#fff0f5;
+      color:var(--hot);
+      position:relative;
+    }
+
+    #result{
+      margin-top:18px;
+      font-size:20px;
+      font-weight:600;
+      color:var(--hot);
+      display:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="card">
+    <h1>Camila 💖</h1>
+    <p>¿Quieres ser mi San Valentín, cosi?</p>
+    <div class="buttons">
+      <button id="yes">Sí</button>
+      <button id="no">No</button>
+    </div>
+    <div id="result">¡Sabía que dirías que sí! 💘</div>
+  </div>
+
+  <script>
+    // corazones flotando
+    const hearts = document.getElementById("hearts");
+    for(let i=0;i<18;i++){
+      const s = document.createElement("span");
+      s.style.left = Math.random()*100 + "vw";
+      s.style.animationDelay = (Math.random()*8) + "s";
+      s.style.transform = `rotate(45deg) scale(${0.6 + Math.random()})`;
+      s.style.background = Math.random() > .5 ? "#ff4d6d" : "#ff8fab";
+      s.style.setProperty("--hot", s.style.background);
+      hearts.appendChild(s);
+    }
+
+    // botón "no" que huye
+    const no = document.getElementById("no");
+    no.addEventListener("mouseenter", () => {
+      const x = Math.random() * 240 - 120;
+      const y = Math.random() * 140 - 70;
+      no.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    const yes = document.getElementById("yes");
+    const result = document.getElementById("result");
+    yes.addEventListener("click", () => {
+      result.style.display = "block";
+    });
+  </script>
+</body>
 </html>
